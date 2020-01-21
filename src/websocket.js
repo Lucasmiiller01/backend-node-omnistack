@@ -25,13 +25,14 @@ exports.findConnections = (coordinates, techs) => {
   return connections.filter(connection => {
     console.log(coordinates, connection.coordinates, techs, connection.techs);
     return (
-      calculateDistance(coordinates, connection.coordinates) < 10 &&
+      calculateDistance(coordinates, connection.coordinates) < 1000 &&
       connection.techs.some(item => techs.includes(item))
     );
   });
 };
 
 exports.sendMessage = (to, message, data) => {
+  console.log(to);
   to.forEach(connection => {
     io.to(connection.id).emit(message, data);
   });
